@@ -6,6 +6,7 @@ import javax.persistence.*;
 public class Item {
     @Id
     @Column(name = "ID_ITEM")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Column(name = "SKU")

@@ -12,6 +12,7 @@ public class Pedido {
 
     @Id
     @Column(name = "ID_PEDIDO")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Column(name = "NOME_CLIENTE")

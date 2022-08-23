@@ -3,9 +3,7 @@ package com.rocketwave.model;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.time.LocalDate;
 
@@ -14,17 +12,16 @@ public class Cliente {
 
     @Id
     @Column(name = "ID_CLIENTE")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Column(name = "NOME_COMPLETO")
     private String nome;
 
-    @Column(name = "CPF", unique = true)
-    @CPF(message = "CPF inválido")
+    @Column(name = "CPF")
     private String cpf;
 
-    @Column(name = "EMAIL", unique = true)
-    @Email(message = "E-mail inválido!")
+    @Column(name = "EMAIL")
     private String email;
 
     @Column(name = "ENDERECO")

@@ -1,12 +1,15 @@
 package com.rocketwave.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
 public class Item {
     @Id
     @Column(name = "ID_ITEM")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ITEM")
+    @SequenceGenerator(name = "SEQ_ITEM", sequenceName = "id_seq_item", allocationSize = 1)
     private Integer id;
 
     @Column(name = "SKU")
@@ -26,6 +29,7 @@ public class Item {
 
     @ManyToOne
     @JoinColumn(name="PEDIDO_ID")
+    @JsonBackReference
     private Pedido pedido;
 
 

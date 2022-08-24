@@ -2,6 +2,8 @@ package com.rocketwave.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -43,7 +45,8 @@ public class Pedido {
     @Column(name = "VALOR_TOTAL_CENTAVOS")
     private Integer valorTotal;
 
-    @OneToMany(mappedBy="pedido")
+    @OneToMany(mappedBy="pedido", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
     private List<Item> itensDoPedido;
 

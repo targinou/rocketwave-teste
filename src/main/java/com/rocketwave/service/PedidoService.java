@@ -4,6 +4,7 @@ import com.rocketwave.dto.ItemDTO;
 import com.rocketwave.dto.PedidoRequestDTO;
 import com.rocketwave.dto.ResponseDTO;
 import com.rocketwave.exception.ConflictException;
+import com.rocketwave.exception.ValidationException;
 import com.rocketwave.model.Cliente;
 import com.rocketwave.model.Item;
 import com.rocketwave.model.Pedido;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,6 @@ public class PedidoService {
         Cliente cliente = new Cliente();
         Pedido pedido = new Pedido();
         List<Item> itensDoPedido = new ArrayList<Item>();
-
 
         for(ItemDTO itemDoPedidoDTO : pedidoDTO.getItensDoPedido()) {
             Item item = new Item();
@@ -82,6 +83,18 @@ public class PedidoService {
 
     }
 
+    @Transactional
+    public ResponseEntity<?> excluirPedido(Integer id) {
+
+        if (pedidoRepository.findById(id).isPresent()){
+            pedidoRepository.delete(id);
+        } else {
+            throw new ValidationException("Pedido não encontrado.");
+        }
+
+        return new ResponseEntity<>(new ResponseDTO(204, "Cliente removido com sucesso!"), HttpStatus.NO_CONTENT);
+    }
+
     public Pedido fromDTO (PedidoRequestDTO pedidoDTO, Cliente cliente, List<Item> itensDoPedido) {
         Pedido pedido = new Pedido();
 
@@ -109,4 +122,5 @@ public class PedidoService {
         return pedidoRepository.save(pedido);
 
     }
+
 }

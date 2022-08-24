@@ -1,5 +1,6 @@
 package com.rocketwave.service;
 
+import com.rocketwave.dto.ClienteDTO;
 import com.rocketwave.dto.ResponseDTO;
 import com.rocketwave.exception.ConflictException;
 import com.rocketwave.exception.ValidationException;
@@ -26,8 +27,9 @@ public class ClienteService {
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    public ResponseEntity<?> salvarCliente (Cliente cliente) {
+    public ResponseEntity<?> salvarCliente (ClienteDTO clienteDTO) {
 
+        Cliente cliente = fromDTO(clienteDTO);
         validarCliente(cliente);
 
         List<Pedido> pedidos = new ArrayList<Pedido>();
@@ -138,6 +140,21 @@ public class ClienteService {
         }
 
     }
+
+    public Cliente fromDTO (ClienteDTO clienteDTO) {
+        Cliente cliente = new Cliente();
+
+        cliente.setNome(clienteDTO.getNome());
+        cliente.setCpf(clienteDTO.getCpf());
+        cliente.setEmail(clienteDTO.getEmail());
+        cliente.setTelefone(clienteDTO.getTelefone());
+        cliente.setEndereco(clienteDTO.getEndereco());
+        cliente.setDataNascimento(clienteDTO.getDataNascimento());
+
+        return cliente;
+    }
+
+
 
 
 }

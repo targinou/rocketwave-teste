@@ -40,8 +40,9 @@ public class ClienteService {
         return new ResponseEntity<>(new ResponseDTO(201, "Cliente cadastrado com sucesso!"), HttpStatus.CREATED);
     }
 
-    public ResponseEntity<?> atualizarCliente (Cliente cliente, Integer id) {
+    public ResponseEntity<?> atualizarCliente (ClienteDTO clienteDTO, Integer id) {
 
+        Cliente cliente = fromDTO(clienteDTO);
         cliente.setId(id);
 
 

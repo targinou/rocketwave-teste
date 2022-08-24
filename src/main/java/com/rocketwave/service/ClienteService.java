@@ -4,6 +4,7 @@ import com.rocketwave.dto.ResponseDTO;
 import com.rocketwave.exception.ConflictException;
 import com.rocketwave.exception.ValidationException;
 import com.rocketwave.model.Cliente;
+import com.rocketwave.model.Pedido;
 import com.rocketwave.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,11 +20,14 @@ import java.util.Objects;
 public class ClienteService {
 
     @Autowired
-    ClienteRepository clienteRepository;
+    private ClienteRepository clienteRepository;
 
     public ResponseEntity<?> salvarCliente (Cliente cliente) {
 
         validarCliente(cliente);
+
+        List<Pedido> pedidos = new ArrayList<Pedido>();
+        cliente.setPedidos(pedidos);
 
         clienteRepository.save(cliente);
 
@@ -69,6 +74,23 @@ public class ClienteService {
         return new ResponseEntity<>(new ResponseDTO(204, "Cliente removido com sucesso!"), HttpStatus.NO_CONTENT);
     }
 
+    public Cliente salvarClienteDoPedido (Cliente cliente) {
+
+        validarCliente(cliente);
+        List<Pedido> pedidos = new ArrayList<Pedido>();
+        cliente.setPedidos(pedidos);
+        return clienteRepository.save(cliente);
+
+    }
+
+    public void cadastrarPedidosDoCliente (Cliente cliente, Pedido pedido) {
+
+        List<Pedido> pedidosDoCliente = cliente.getPedidos();
+        pedidosDoCliente.add(pedido);
+        cliente.setPedidos(pedidosDoCliente);
+        clienteRepository.save(cliente);
+
+    }
 
     private void validarCliente (Cliente cliente)  {
 

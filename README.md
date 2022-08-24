@@ -22,7 +22,7 @@ Este projeto é criado com:
 
 * Crie o banco de dados de acordo como está definido o datasource no arquivo application.properties. Você pode criar localmente o banco de dados postgreSql no seu SGBD de preferencia.
 
-* Para garantir que está tudo ok com o projeto montado na sua IDE rode: maven clean; maven instal;
+* Para garantir que está tudo certo com o projeto montado na sua IDE rode: maven clean; maven instal;
 
-* Rode o projeto pela primeira vez, a classe main é RocketWaveTesteApplication.java, se tudo estivor ok serão criadas as tabelas no banco de dados e você já aconsegue acessar a aplicação;
+* Rode o projeto pela primeira vez, a classe main é RocketWaveTesteApplication.java, se tudo estiver certo serão criadas as tabelas no banco de dados e você já aconsegue acessar a aplicação em http://localhost:8082;
 

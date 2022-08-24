@@ -24,5 +24,5 @@ Este projeto é criado com:
 
 * Para garantir que está tudo certo com o projeto montado na sua IDE rode: maven clean; maven instal;
 
-* Rode o projeto pela primeira vez, a classe main é RocketWaveTesteApplication.java, se tudo estiver certo serão criadas as tabelas no banco de dados e você já aconsegue acessar a aplicação em http://localhost:8082;
+* Rode o projeto pela primeira vez, a classe main é RocketWaveTesteApplication.java, se tudo estiver certo serão criadas as tabelas no banco de dados e você já aconsegue acessar a aplicação em http://localhost:8082/swagger-ui/index.html#/ e verificar a documentação;
 

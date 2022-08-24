@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class ClienteService {
@@ -74,15 +73,15 @@ public class ClienteService {
     private void validarCliente (Cliente cliente)  {
 
         if (cliente.getNome() == null || Objects.equals(cliente.getNome(), "")) {
-            throw new ValidationException("Deve ser informado o nome do cliente.");
+            throw new ConflictException("Deve ser informado o nome do cliente.");
         }
 
         if (cliente.getCpf() == null || Objects.equals(cliente.getCpf(), "")) {
-            throw new ValidationException("Deve ser informado um CPF.");
+            throw new ConflictException("Deve ser informado um CPF.");
         }
 
         if (cliente.getEmail() == null || Objects.equals(cliente.getEmail(), "")) {
-            throw new ValidationException("Deve ser informado um email.");
+            throw new ConflictException("Deve ser informado um email.");
         }
 
         if (clienteRepository.findClienteByEmail(cliente.getEmail()) != null &&
@@ -91,15 +90,15 @@ public class ClienteService {
         }
 
         if (cliente.getEndereco() == null || Objects.equals(cliente.getEndereco(), "")) {
-            throw new ValidationException("Deve ser informado um endereço.");
+            throw new ConflictException("Deve ser informado um endereço.");
         }
 
         if (cliente.getTelefone() == null || Objects.equals(cliente.getTelefone(), "")) {
-            throw new ValidationException("Deve ser informado um telefone.");
+            throw new ConflictException("Deve ser informado um telefone.");
         }
 
         if (cliente.getDataNascimento() == null) {
-            throw new ValidationException("Deve ser informado uma data de nascimento.");
+            throw new ConflictException("Deve ser informado uma data de nascimento.");
         }
 
     }

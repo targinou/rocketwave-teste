@@ -50,7 +50,7 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> excluirCliente (@PathVariable Integer id) {
+    public ResponseEntity<?> excluir (@PathVariable Integer id) {
         try {
             return clienteService.excluirCliente(id);
         } catch (ConflictException e) {

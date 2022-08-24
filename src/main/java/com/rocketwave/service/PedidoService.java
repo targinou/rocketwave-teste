@@ -92,7 +92,7 @@ public class PedidoService {
             throw new ValidationException("Pedido não encontrado.");
         }
 
-        return new ResponseEntity<>(new ResponseDTO(204, "Cliente removido com sucesso!"), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new ResponseDTO(204, "Pedido removido com sucesso!"), HttpStatus.NO_CONTENT);
     }
 
     public Pedido fromDTO (PedidoRequestDTO pedidoDTO, Cliente cliente, List<Item> itensDoPedido) {

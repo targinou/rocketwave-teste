@@ -1,5 +1,7 @@
 package com.rocketwave.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -12,7 +14,8 @@ public class Pedido {
 
     @Id
     @Column(name = "ID_PEDIDO")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PEDIDO")
+    @SequenceGenerator(name = "SEQ_PEDIDO", sequenceName = "id_seq_pedido", allocationSize = 1)
     private Integer id;
 
     @Column(name = "NOME_CLIENTE")
@@ -41,10 +44,12 @@ public class Pedido {
     private Integer valorTotal;
 
     @OneToMany(mappedBy="pedido")
+    @JsonManagedReference
     private List<Item> itensDoPedido;
 
     @ManyToOne
-    @JoinColumn(name="CLIENTE_ID")
+    @JoinColumn(name="ID_CLIENTE", nullable = true)
+    @JsonBackReference
     private Cliente cliente;
 
     public Pedido() {

@@ -1,10 +1,11 @@
 package com.rocketwave.model;
 
-import org.hibernate.validator.constraints.br.CPF;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -14,7 +15,8 @@ public class Cliente {
 
     @Id
     @Column(name = "ID_CLIENTE")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CLIENTE")
+    @SequenceGenerator(name = "SEQ_CLIENTE", sequenceName = "id_seq_cliente", allocationSize = 1)
     private Integer id;
 
     @Column(name = "NOME_COMPLETO")
@@ -37,6 +39,8 @@ public class Cliente {
     private LocalDate dataNascimento;
 
     @OneToMany(mappedBy="cliente")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @JsonManagedReference
     private List<Pedido> pedidos;
 
     public Cliente() {

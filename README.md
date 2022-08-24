@@ -18,7 +18,7 @@ Este projeto é criado com:
 ## Rodando o projeto
 * Faça git clone do projeto no repositório (git clone https://github.com/targinou/rocketwave-teste.git)
 
-* Importe como projeto Maven. Nesse momento o projeto irá baixar todas suas dependencias de acordo com o que está definido no pom.
+* Importe como projeto Maven na sua IDE de preferência. Nesse momento o projeto irá baixar todas suas dependencias de acordo com o que está definido no pom.
 
 * Crie o banco de dados de acordo como está definido o datasource no arquivo application.properties. Você pode criar localmente o banco de dados postgreSql no seu SGBD de preferencia.
 

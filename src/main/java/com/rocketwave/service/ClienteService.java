@@ -6,6 +6,7 @@ import com.rocketwave.exception.ValidationException;
 import com.rocketwave.model.Cliente;
 import com.rocketwave.model.Pedido;
 import com.rocketwave.repository.ClienteRepository;
+import com.rocketwave.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,9 @@ public class ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private PedidoRepository pedidoRepository;
 
     public ResponseEntity<?> salvarCliente (Cliente cliente) {
 
@@ -66,6 +70,16 @@ public class ClienteService {
     public ResponseEntity<?> excluirCliente(Integer id) {
 
         if (clienteRepository.findById(id).isPresent()){
+
+            List<Pedido> listaDePedidosDoCliente = pedidoRepository.findPedidoByCliente(id);
+
+            for(Pedido pedido : listaDePedidosDoCliente) {
+                pedido.setCliente(null);
+                pedidoRepository.save(pedido);
+            }
+
+            clienteRepository.findById(id).get().setPedidos(null);
+
             clienteRepository.delete(id);
         } else {
             throw new ValidationException("Cliente não encontrado.");

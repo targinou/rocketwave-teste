@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/cliente")
@@ -17,7 +19,7 @@ public class ClienteController {
     @Autowired
     ClienteService clienteService;
 
-    @PostMapping("/salvar")
+    @PostMapping
     public ResponseEntity<?> salvar(@RequestBody Cliente cliente) {
 
         try {
@@ -29,4 +31,33 @@ public class ClienteController {
         }
 
     }
+
+    @GetMapping
+    public List<Cliente> listar () {
+        return clienteService.listarClientes();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> atualizar(@PathVariable Integer id, @RequestBody Cliente cliente) {
+
+        try {
+            return clienteService.atualizarCliente(cliente, id);
+        } catch (ConflictException e) {
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(new ResponseDTO(422, e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDTO(400, e.getMessage()));
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> excluirCliente (@PathVariable Integer id) {
+        try {
+            return clienteService.excluirCliente(id);
+        } catch (ConflictException e) {
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(new ResponseDTO(422, e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDTO(400, e.getMessage()));
+        }
+    }
+
 }

@@ -20,7 +20,7 @@ Este projeto é criado com:
 
 * Importe como projeto Maven na sua IDE de preferência. Nesse momento o projeto irá baixar todas suas dependencias de acordo com o que está definido no pom.
 
-* Crie o banco de dados de acordo como está definido o datasource no arquivo application.properties. Você pode criar localmente o banco de dados postgreSql no seu SGBD de preferencia.
+* Crie o banco de dados de acordo como está definido o datasource no arquivo application.properties. Você pode criar localmente o banco de dados postgreSQL no seu SGBD de preferencia.
 
 * Para garantir que está tudo certo com o projeto montado na sua IDE rode: maven clean; maven instal;
 

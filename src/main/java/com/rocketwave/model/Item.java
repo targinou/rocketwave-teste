@@ -16,16 +16,16 @@ public class Item {
     private String nome;
 
     @Column(name = "VALOR_UNITARIO_CENTAVOS")
-    private Long valorUnitario;
+    private Integer valorUnitario;
 
     @Column(name = "VALOR_TOTAL_CENTAVOS")
-    private Long valorTotal;
+    private Integer valorTotal;
 
     @Column(name = "QUANTIDADE")
     private Integer quantidade;
 
     @ManyToOne
-    @JoinColumn(name="PEDIDO_ID", nullable=false)
+    @JoinColumn(name="PEDIDO_ID")
     private Pedido pedido;
 
 
@@ -56,19 +56,19 @@ public class Item {
         this.nome = nome;
     }
 
-    public Long getValorUnitario() {
+    public Integer getValorUnitario() {
         return valorUnitario;
     }
 
-    public void setValorUnitario(Long valorUnitario) {
+    public void setValorUnitario(Integer valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
 
-    public Long getValorTotal() {
+    public Integer getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(Long valorTotal) {
+    public void setValorTotal(Integer valorTotal) {
         this.valorTotal = valorTotal;
     }
 

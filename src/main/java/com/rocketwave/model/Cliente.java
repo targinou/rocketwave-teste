@@ -6,8 +6,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
+@Table(name="CLIENTE")
 public class Cliente {
 
     @Id
@@ -33,6 +35,9 @@ public class Cliente {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "DATA_NASCIMENTO")
     private LocalDate dataNascimento;
+
+    @OneToMany(mappedBy="cliente")
+    private List<Pedido> pedidos;
 
     public Cliente() {
     }
@@ -91,5 +96,13 @@ public class Cliente {
 
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 }

@@ -38,10 +38,14 @@ public class Pedido {
     private String enderecoEntrega;
 
     @Column(name = "VALOR_TOTAL_CENTAVOS")
-    private Long valorTotal;
+    private Integer valorTotal;
 
     @OneToMany(mappedBy="pedido")
     private List<Item> itensDoPedido;
+
+    @ManyToOne
+    @JoinColumn(name="CLIENTE_ID")
+    private Cliente cliente;
 
     public Pedido() {
     }
@@ -110,11 +114,11 @@ public class Pedido {
         this.enderecoEntrega = enderecoEntrega;
     }
 
-    public Long getValorTotal() {
+    public Integer getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(Long valorTotal) {
+    public void setValorTotal(Integer valorTotal) {
         this.valorTotal = valorTotal;
     }
 
@@ -124,5 +128,13 @@ public class Pedido {
 
     public void setItensDoPedido(List<Item> itensDoPedido) {
         this.itensDoPedido = itensDoPedido;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }
